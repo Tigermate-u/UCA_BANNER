@@ -3,12 +3,22 @@ import time
 import sys
 import shutil
 import platform
+import random
 
-# Tool: LEVIATHAN-ULTIMATE-CROSS-PLATFORM
+# Tool: UCA-Dashboard-Ultimate
 # Author: Mr.LEVIATHAN
-# Description: Works on Windows (Simulation) & Termux (Real)
+# Description: Intro Animation, 5-Step Loader & Visual Preview
 
-# --- SYSTEM SETTINGS ---
+# --- COLORS ---
+R = '\033[1;31m'  # Red
+G = '\033[1;32m'  # Green
+C = '\033[1;36m'  # Cyan
+Y = '\033[1;33m'  # Yellow
+P = '\033[1;35m'  # Purple
+W = '\033[1;37m'  # White
+BK = '\033[1;30m' # Black
+RESET = '\033[0m'
+
 system_os = platform.system()
 
 # Check Pyfiglet for Windows Preview
@@ -17,270 +27,266 @@ try:
 except ImportError:
     pyfiglet = None
 
-def get_width():
+def get_cols():
     try:
-        return shutil.get_terminal_size().columns
+        cols, _ = shutil.get_terminal_size()
     except:
-        return 80
+        cols = 80
+    return cols
 
-width = get_width()
-
-# --- COLORS ---
-R = '\033[1;31m'
-G = '\033[1;32m'
-C = '\033[1;36m'
-Y = '\033[1;33m'
-W = '\033[1;37m'
-BK = '\033[1;30m'
-RESET = '\033[0m'
-
-# --- UTILS ---
 def clear():
-    os.system('cls' if system_os == "Windows" else 'clear')
+    if system_os == "Windows": os.system('cls')
+    else: os.system('clear')
 
-def loader(text):
-    for x in range(0, 101, 5):
-        sys.stdout.write(f"\r {C}:: {text} ... {Y}[{x}%]")
-        sys.stdout.flush()
-        time.sleep(0.02)
-    print(f"\r {C}:: {text} ... {G}[COMPLETE]   ")
+# --- 1. INTRO BOOT ANIMATION ---
+def intro_animation():
+    clear()
+    cols = get_cols()
+    print(f"\n{BK} [INIT] ESTABLISHING CONNECTION TO UCA SERVER...{RESET}")
+    time.sleep(0.5)
+    
+    # Fake Matrix Rain / Boot Log
+    logs = [
+        "LOADING_KERNEL_MODULES",
+        "VERIFYING_USER_PERMISSIONS",
+        "FETCHING_THEME_DATABASE",
+        "OPTIMIZING_GRAPHIC_INTERFACE",
+        "ACCESS_GRANTED_UCA_CORE"
+    ]
+    
+    for log in logs:
+        sys.stdout.write(f"\r {C}:: SYSTEM_BOOT >> {log:<30} {Y}[WAIT]")
+        time.sleep(0.2)
+        sys.stdout.write(f"\r {C}:: SYSTEM_BOOT >> {log:<30} {G}[OK]  \n")
+        time.sleep(0.1)
+    
+    time.sleep(0.5)
+    clear()
 
-# --- DATA ---
-THEMES = {
-    1: {"name": "NEON CYAN",   "code": "36"},
-    2: {"name": "HACKER GREEN","code": "32"},
-    3: {"name": "ALERT RED",   "code": "31"},
-    4: {"name": "ROYAL GOLD",  "code": "33"},
-    5: {"name": "DEEP PURPLE", "code": "35"},
-}
+# --- 2. SETUP LOADING ANIMATION (5 STEPS) ---
+def install_loaders():
+    clear()
+    print(f"\n{G}[*] INITIALIZING INSTALLATION PROTOCOLS...{RESET}\n")
+    time.sleep(0.5)
+    
+    steps = [
+        "CONFIGURING DASHBOARD LAYOUT",
+        "DOWNLOADING HIGH-RES ASSETS",
+        "INJECTING BASH CONFIGURATION",
+        "OPTIMIZING PERFORMANCE",
+        "FINALIZING SYSTEM VERIFICATION"
+    ]
+    
+    for step in steps:
+        # Animation for each step
+        for i in range(4):
+            chars = "/-\|"
+            sys.stdout.write(f"\r {C}[PROCESS] {step}... {Y}{chars[i]} ")
+            sys.stdout.flush()
+            time.sleep(0.1)
+        
+        # Done status
+        sys.stdout.write(f"\r {C}[PROCESS] {step:<35} {G}[DONE] \n")
+        time.sleep(0.2)
+    
+    print(f"\n{BK} [LOG] SYSTEM REBOOT REQUIRED...{RESET}")
+    time.sleep(1)
+    clear()
 
-FONTS = [
-    ("Ansi Shadow", "ansi_shadow"), ("Bloody", "bloody"), ("Graffiti", "graffiti"),
-    ("Electronic", "electronic"), ("Sub-Zero", "sub-zero"), ("Slant", "slant"),
-    ("Rectangles", "rectangles"), ("Standard", "standard"), ("Small", "small"),
-    ("Script", "script"), ("Doom", "doom"), ("Big", "big")
+
+# --- HEADER ART ---
+def print_uca_header():
+    logo = f"""
+{C}██╗   ██╗ ██████╗ ██████╗ 
+{C}██║   ██║██╔════╝██╔══██╗   {Y}[ UCA TERMINAL PRO ]
+{C}██║   ██║██║     ███████║
+{C}██║   ██║██║     ██╔══██║   {R}OWNER : Mr.LEVIATHAN
+{C}╚██████╔╝╚██████╗██║  ██║   {G}STATUS: ONLINE
+{C} ╚═════╝  ╚═════╝╚═╝  ╚═╝
+"""
+    print(logo)
+    print(f"{BK}========================================{RESET}")
+
+# --- FONT DATABASE ---
+font_db = [
+    ("Bloody", "bloody"), ("Ansi Shadow", "ansi_shadow"), ("Graffiti", "graffiti"),
+    ("Electronic", "electronic"), ("Sub-Zero", "sub-zero"), ("Calvin S", "calvin_s"),
+    ("Slant", "slant"), ("Rectangles", "rectangles"), ("Larry 3D", "larry3d"),
+    ("Delta Corps", "delta_corps_priest_1"), ("Standard", "standard"), ("Big", "big"),
+    ("Script", "script"), ("Doom", "doom"), ("Speed", "speed"),
+    ("Alligator", "alligator"), ("Cyber Large", "cyberlarge"), ("Digital", "digital"),
+    ("Epic", "epic"), ("Fender", "fender"), ("Ghost", "ghost"),
+    ("Isometric1", "isometric1"), ("Isometric2", "isometric2"), ("Hollywood", "hollywood"),
+    ("Invita", "invita"), ("Kban", "kban"), ("Lean", "lean"),
+    ("Letters", "letters"), ("Linux", "linux"), ("Lockergnome", "lockergnome"),
+    ("Madrid", "madrid"), ("Marquee", "marquee"), ("Maxfour", "maxfour"),
+    ("Mike", "mike"), ("Mini", "mini"), ("Mirror", "mirror"),
+    ("NancyJ", "nancyj"), ("Nipples", "nipples"), ("Ogre", "ogre"),
+    ("Pawp", "pawp"), ("Peaks", "peaks"), ("Poison", "poison"),
+    ("Puffy", "puffy"), ("Pyramid", "pyramid"), ("Relief", "relief"),
+    ("Roman", "roman"), ("Rot13", "rot13"), ("Rounded", "rounded"),
+    ("Rowan Cap", "rowancap"), ("Serif Cap", "serifcap")
 ]
 
-# --- 1. BOOT SEQUENCE ---
-def boot():
+# --- REAL PREVIEW FUNCTION ---
+def show_preview(name, font_file, font_name):
     clear()
-    print(f"\n{BK} [KERNEL] DETECTED OS: {system_os.upper()}...{RESET}")
-    time.sleep(1)
+    cols = get_cols()
     
-    logs = ["LOADING_MODULES", "CHECKING_COMPATIBILITY", "STARTING_INTERFACE"]
-    for log in logs:
-        sys.stdout.write(f"\r {C}:: SYSTEM >> {log:<25} {Y}[...]")
-        time.sleep(0.2)
-        sys.stdout.write(f"\r {C}:: SYSTEM >> {log:<25} {G}[OK]  \n")
-    clear()
-
-# --- 2. HEADER UI ---
-def header(color=C):
-    print(f"{color}██╗   ██╗ ██████╗ ██████╗ ")
-    print(f"{color}██║   ██║██╔════╝██╔══██╗   {Y}[ PREMIUM EDITION ]")
-    print(f"{color}██║   ██║██║     ███████║   {R}DEV: Mr.LEVIATHAN")
-    print(f"{color}██║   ██║██║     ██╔══██║   {G}VER: 12.5 (FIXED)")
-    print(f"{color}╚██████╔╝╚██████╗██║  ██║")
-    print(f"{color} ╚═════╝  ╚═════╝╚═╝  ╚═╝{RESET}")
-    print(f"{BK}{'='*width}{RESET}")
-
-# --- WINDOWS PREVIEW GENERATOR ---
-def get_windows_art(text, font_file):
-    if not pyfiglet:
-        return "[!] Install 'pyfiglet' to see art on Windows"
+    # 1. INFO PANEL (TOP)
+    print(f"{C}╔{'═'*(cols-2)}╗")
+    print(f"{C}║ {P}PREVIEW MODE  {R}●  {W}STYLE: {Y}{font_name.upper()} {C}".center(cols+18))
+    print(f"{C}╠{'═'*(cols-2)}╣")
     
-    # Mapping Termux font names to Pyfiglet names
-    f_map = {
-        "ansi_shadow": "doom", "bloody": "larry3d", "graffiti": "graffiti",
-        "electronic": "computer", "sub-zero": "slant", "slant": "slant",
-        "rectangles": "rectangles", "standard": "standard", "small": "small",
-        "script": "script", "doom": "doom", "big": "big"
-    }
-    use_font = f_map.get(font_file, "standard")
-    try:
-        return pyfiglet.figlet_format(text, font=use_font, width=width, justify="center")
-    except:
-        return pyfiglet.figlet_format(text)
+    # 2. BANNER GENERATION (MIDDLE)
+    print(f"{C}╚{'═'*(cols-2)}╝{RESET}") 
+    print("") 
+    
+    if system_os == "Windows":
+        if pyfiglet:
+            try:
+                # Windows Preview Logic
+                f_map = {
+                    "bloody": "larry3d", "ansi_shadow": "doom", "electronic": "computer",
+                    "sub-zero": "slant", "calvin_s": "block", "graffiti": "graffiti"
+                }
+                use_font = f_map.get(font_file, font_file)
+                if use_font not in pyfiglet.FigletFont.getFonts():
+                    use_font = "standard"
+                
+                art = pyfiglet.figlet_format(name, font=use_font, justify="center", width=cols)
+                print(f"{C}{art}{RESET}")
+            except Exception as e:
+                print(f"{R}[!] Font render error: {e}{RESET}")
+        else:
+            print(f"{R}[!] INSTALL PYFIGLET TO SEE VISUAL PREVIEW (pip install pyfiglet){RESET}")
 
-# --- MAIN WORKFLOW ---
+    else:
+        # TERMUX PREVIEW LOGIC
+        path = f"/data/data/com.termux/files/usr/share/figlet/{font_file}.flf"
+        # Download if missing (Lazy Load)
+        if not os.path.exists(path):
+             print(f"{BK}Downloading font assets...{RESET}")
+             os.system(f"wget -q http://www.figlet.org/fonts/{font_file}.flf -O {path}")
+             if not os.path.exists(path) or os.path.getsize(path) < 100:
+                  os.system(f"wget -q https://github.com/xero/figlet-fonts/raw/master/{font_file}.flf -O {path}")
+                  if font_file == "ansi_shadow": os.system(f"wget -q https://github.com/xero/figlet-fonts/raw/master/ANSI%20Shadow.flf -O {path}")
+
+        # Render Real Art
+        os.system(f'figlet -f {font_file} -w {cols} -c "{name}" | lolcat')
+
+    print("") # Spacer
+
+    # 3. FOOTER PANEL
+    print(f"{C}╔{'═'*(cols-2)}╗")
+    print(f"{C}║{f'{Y}>>> Made By Mr.LEVIATHAN <<<'.center(cols+8)}{C}║")
+    print(f"{C}╚{'═'*(cols-2)}╝{RESET}")
+
+# --- MAIN ---
 def main():
-    boot()
-    header()
+    # 1. INTRO ANIMATION
+    intro_animation()
 
-    # --- STEP 1: IDENTITY ---
-    print(f"\n {C}┌──[ {Y}STEP 1: IDENTITY {C}]")
+    print_uca_header()
+
+    print(f"\n {C}┌──[ {P}IDENTITY {C}]")
     try:
-        name = input(f" {C}└─➤ {W}ENTER USERNAME :: {Y}").strip()
+        name = input(f" {C}└─➤ {Y}ENTER NAME :: {W}").strip()
     except: name = "LEVIATHAN"
     if not name: name = "LEVIATHAN"
 
-    # --- STEP 2: SECURITY ---
-    print(f"\n {C}┌──[ {Y}STEP 2: LOCK SCREEN {C}]")
-    print(f" {C}│ {BK}Leave empty for auto-login.")
-    password = input(f" {C}└─➤ {W}SET PASSWORD :: {Y}").strip()
-
-    # --- STEP 3: THEME ---
-    print(f"\n {C}┌──[ {Y}STEP 3: SELECT THEME {C}]")
-    for k, v in THEMES.items():
-        col = f"\033[1;{v['code']}m"
-        print(f" {C}│ {col}[{k}] {v['name']}{RESET}")
-    
-    try:
-        t_id = int(input(f" {C}└─➤ {W}ENTER ID :: {Y}"))
-        if t_id not in THEMES: t_id = 1
-    except: t_id = 1
-    
-    sel_theme = THEMES[t_id]
-    
-    # --- STEP 4: FONT PREVIEW LOOP ---
     while True:
         clear()
-        TC = f"\033[1;{sel_theme['code']}m" # Selected Theme Color
+        print_uca_header()
+        print(f"{G} [✔] USER: {W}{name.upper()}{RESET}\n")
         
-        header(TC)
-        print(f"{TC} [ USER: {name.upper()} ]   [ THEME: {sel_theme['name']} ]{RESET}\n")
-        
-        # Grid Menu
-        for i, (fname, ffile) in enumerate(FONTS):
-            print(f" {TC}[{i+1:02}] {W}{fname}")
-        
-        print(f"\n {TC}┌──[ {Y}FONT CONFIG {TC}]")
+        # Menu
+        rows = (len(font_db) // 3) + 1
+        for i in range(rows):
+            idx1, idx2, idx3 = i, i + rows, i + (rows * 2)
+            s1 = f"{C}[{idx1+1:02}] {W}{font_db[idx1][0]:<14}" if idx1 < len(font_db) else ""
+            s2 = f"{C}[{idx2+1:02}] {W}{font_db[idx2][0]:<14}" if idx2 < len(font_db) else ""
+            s3 = f"{C}[{idx3+1:02}] {W}{font_db[idx3][0]:<14}" if idx3 < len(font_db) else ""
+            print(f" {s1} {s2} {s3}")
+
+        print(f"\n {C}┌──[ {P}CONFIG {C}]")
         try:
-            f_id = int(input(f" {TC}└─➤ {W}ENTER ID :: {Y}"))
-            if 1 <= f_id <= len(FONTS):
-                sel_font_name, sel_font_file = FONTS[f_id-1]
+            choice = int(input(f" {C}└─➤ {Y}SELECT ID :: {W}"))
+            if 1 <= choice <= len(font_db):
+                sel_name, sel_file = font_db[choice-1]
             else:
-                sel_font_name, sel_font_file = FONTS[0]
-        except: sel_font_name, sel_font_file = FONTS[0]
+                sel_name, sel_file = font_db[0]
+        except:
+            sel_name, sel_file = font_db[0]
 
-        # --- PREVIEW LOGIC ---
-        clear()
-        print(f"\n{BK}Rendering Preview...{RESET}")
+        # SHOW THE REAL PREVIEW
+        show_preview(name, sel_file, sel_name)
         
-        # UI Box
-        print(f"{TC}╔{'═'*(width-2)}╗")
-        print(f"{TC}║ {Y}PREVIEW MODE: {sel_font_name.upper()} {TC}".center(width+15))
-        print(f"{TC}╠{'═'*(width-2)}╣")
-        print(f"{TC}║{' '*(width-2)}║")
+        print(f"\n {R}[?] {Y}ACTIVATE DASHBOARD? {R}(y/n)")
+        confirm = input(f" {C}└─➤ {W}").strip().lower()
         
-        print(f"{TC}")
-        
-        # SMART RENDERER (Windows vs Termux)
-        if system_os == "Windows":
-            print(get_windows_art(name, sel_font_file))
-        else:
-            # Termux: Download if missing
-            path = f"/data/data/com.termux/files/usr/share/figlet/{sel_font_file}.flf"
-            os.system("pkg install figlet -y > /dev/null 2>&1") # Silent install
-            
-            if not os.path.exists(path):
-                os.system(f"wget -q http://www.figlet.org/fonts/{sel_font_file}.flf -O {path}")
-                if not os.path.exists(path) or os.path.getsize(path) < 100:
-                     os.system(f"wget -q https://github.com/xero/figlet-fonts/raw/master/{sel_font_file}.flf -O {path}")
-            
-            os.system(f'figlet -f {sel_font_file} -w {width} -c "{name}"')
-            
-        print(f"{RESET}")
-        
-        print(f"{TC}║{' '*(width-2)}║")
-        print(f"{TC}╚{'═'*(width-2)}╝{RESET}")
-        
-        print(f"\n {R}[?] {Y}INSTALL THIS LAYOUT? {R}(y/n)")
-        confirm = input(f" {TC}└─➤ {W}").strip().lower()
-        if confirm == 'y': break
+        if confirm == 'y':
+            # 2. RUN INSTALL LOADERS IF CONFIRMED
+            install_loaders()
+            break
 
-    # --- INSTALLATION ---
-    clear()
-    
-    if system_os == "Windows":
-        print(f"\n{TC}[*] SIMULATION COMPLETE!{RESET}")
-        print(f"{G}[✔] The code works perfectly.{RESET}")
-        print(f"{Y}[!] Transfer this file to Termux to apply the dashboard.{RESET}\n")
-        return # Stop here on Windows
-
-    print(f"\n{TC}[*] INSTALLING PREMIUM DASHBOARD...{RESET}\n")
-    loader("CONFIGURING UI")
-    loader("WRITING CONFIG")
-
-    # --- GENERATING .BASHRC ---
-    t_code = sel_theme['code']
-    
-    pass_script = ""
-    if password:
-        pass_script = f"""
-echo -e "\\033[1;31m🔒 SECURE SYSTEM LOCKED"
-read -s -p "🔑 ENTER PASSWORD: " pass
-echo ""
-if [ "$pass" != "{password}" ]; then
-    echo -e "\\033[1;31m[!] WRONG PASSWORD. BYE."
-    sleep 1
-    exit
-fi
-echo -e "\\033[1;32m[✔] ACCESS GRANTED."
-clear
-"""
-
+    # --- BASHRC INSTALL ---
     bashrc_content = f"""
-# --- LEVIATHAN PREMIUM DASHBOARD ---
+# --- UCA SYSTEM ---
 clear
-
-{pass_script}
-
-# --- THEME CONFIG ---
-MAIN="\\033[1;{t_code}m"
-WHITE="\\033[1;37m"
-GRAY="\\033[1;30m"
-RED="\\033[1;31m"
+PS1='\\[\\033[1;36m\\]┌──(\\[\\033[1;31m\\]UCA💀Termux\\[\\033[1;36m\\])-[\\[\\033[1;37m\\]\\w\\[\\033[1;36m\\]]\\n\\[\\033[1;36m\\]└─\\[\\033[1;33m\\]$\\[\\033[0m\\] '
+COLS=$(tput cols)
+C="\\033[1;36m"
+R="\\033[1;31m"
+W="\\033[1;37m"
+Y="\\033[1;33m"
+G="\\033[1;32m"
+BK="\\033[1;30m"
 RESET="\\033[0m"
 
-PS1='${{MAIN}}┌──(${{RED}}UCA💀PRO${{MAIN}})-[${{WHITE}}\\w${{MAIN}}]\\n${{MAIN}}└─${{WHITE}}\\$$RESET '
+# Top Bar
+printf "$C╔"
+for ((i=1; i<=COLS-2; i++)); do printf "═"; done
+printf "╗\\n"
+printf "$C║ $R● $W UCA TERMINAL $R● $C USER: $Y{name.upper()}"
+printf "\\n"
+printf "$C╠"
+for ((i=1; i<=COLS-2; i++)); do printf "═"; done
+printf "╣\\n"
+DATE=$(date +"%d-%m")
+printf "$C║ $BK[NET]: $G SECURE  $BK[IP]: $G HIDDEN  $BK[DATE]: $W $DATE"
+printf "\\n"
 
-COLS=$(tput cols)
-DATE=$(date +"%d-%b-%Y")
-TIME=$(date +"%I:%M %p")
-
-# --- DRAW HUD ---
-echo -e "${{MAIN}}╔$(printf '═%.0s' $(seq 1 $((COLS-2))))╗"
-echo -e "${{MAIN}}║ ${{RED}}● ${{WHITE}}SYSTEM: ${{MAIN}}ONLINE   ${{RED}}● ${{WHITE}}USER: ${{MAIN}}{name.upper()}   ${{RED}}● ${{WHITE}}TIME: ${{MAIN}}$TIME"
-echo -e "${{MAIN}}╠$(printf '═%.0s' $(seq 1 $((COLS-2))))╣"
-
+# Banner
 echo ""
-if [ -f /data/data/com.termux/files/usr/share/figlet/{sel_font_file}.flf ]; then
-    echo -e "${{MAIN}}"
-    figlet -f {sel_font_file} -w $COLS -c "{name}"
-    echo -e "$RESET"
-else
-    echo -e "${{MAIN}}"
-    figlet -w $COLS -c "{name}"
-    echo -e "$RESET"
-fi
-
-echo -e "${{WHITE}}"
-MSG=">>> SYSTEM CREATED BY Mr.LEVIATHAN <<<"
-printf "%*s\\n" $(( (${{#COLS}} + ${{#MSG}}) / 2)) "$MSG"
+echo -e "$C"
+figlet -f {sel_file} -w $COLS -c "{name}"
 echo -e "$RESET"
 
-echo -e "${{MAIN}}╚$(printf '═%.0s' $(seq 1 $((COLS-2))))╝$RESET"
+# Footer
+echo -e "$Y"
+MSG=">>> Made By Mr.LEVIATHAN <<<"
+printf "%*s\\n" $(( (${{#COLS}} + ${{#MSG}}) / 2)) "$MSG"
+echo -e "$RESET"
+printf "$C╚"
+for ((i=1; i<=COLS-2; i++)); do printf "═"; done
+printf "╝\\n"
 echo ""
 
 alias cls='clear'
 alias update='pkg update && pkg upgrade'
-alias uca='python banner.py'
 """
 
-    home = os.environ.get('HOME', '/data/data/com.termux/files/home')
-    path = os.path.join(home, '.bashrc')
-    
-    if os.path.exists(path): os.system(f"cp {path} {path}.bak")
-    
-    with open(path, 'w') as f:
-        f.write(bashrc_content)
+    if system_os != "Windows":
+        home = os.environ.get('HOME', '/data/data/com.termux/files/home')
+        path = os.path.join(home, '.bashrc')
+        if os.path.exists(path): os.system(f"cp {path} {path}.bak")
+        with open(path, 'w') as f: f.write(bashrc_content)
         
-    clear()
-    print(f"\n{TC}╔══════════════════════════════════════════╗")
-    print(f"{TC}║ {W}  SETUP COMPLETED SUCCESSFULLY!           {TC}║")
-    print(f"{TC}║ {W}  PLEASE RESTART TERMUX NOW.              {TC}║")
-    print(f"{TC}╚══════════════════════════════════════════╝{RESET}\n")
+        # 3. SUCCESS MESSAGE
+        print(f"\n{R}╔══════════════════════════════════════════╗")
+        print(f"{R}║ {G}  SETUP SUCCESSFUL! RESTART TERMUX NOW.   {R}║")
+        print(f"{R}╚══════════════════════════════════════════╝{RESET}\n")
 
 if __name__ == "__main__":
     main()
