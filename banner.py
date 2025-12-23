@@ -1,5 +1,7 @@
+'''
 PROTECTED BY LEVIATHAN ULTRA SECURITY
 UNAUTHORIZED DECOMPILATION WILL FAIL
+'''
 import base64 as b64, sys, time
 
 # junk_var_rr7o2j = "0.ftjtnd31lur"
@@ -40,4 +42,3 @@ if __name__ == "__main__":
 # junk_var_uiafp = "0.nuyya2gvltb"
 
     Helix_28blpe(Ultra_rimrkf).run()
-    
