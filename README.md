@@ -31,8 +31,8 @@ Copy and paste these commands in Termux:
 ```bash
 pkg update && pkg upgrade -y
 pkg install git python -y
-git clone https://github.com/YOUR_USERNAME/UCA-TERMINAL-PRO.git
-cd UCA-TERMINAL-PRO
+git clone https://github.com/Tigermate-u/UCA_BANNER.git
+cd UCA_BANNER
 python banner.py
 ```
 ⚠️ Requirements
