@@ -1,292 +1,47 @@
-import os
-import time
-import sys
-import shutil
-import platform
-import random
+# -*- coding: utf-8 -*-
+'''
+PROTECTED BY HELIX-UCA ULTRA SECURITY
+UNAUTHORIZED DECOMPILATION WILL FAIL
+'''
+import base64 as b64, sys, time
 
-# Tool: UCA-Dashboard-Ultimate
-# Author: Mr.LEVIATHAN
-# Description: Intro Animation, 5-Step Loader & Visual Preview
+# junk_var_rr7o2j = "0.ftjtnd31lur"
+# junk_var_rw8rrc = "0.ok1tjj4gfm"
+# junk_var_egft0sh = "0.fz0shozovr9"
+# junk_var_2f1jxk = "0.sra1vq2z9ha"
+# junk_var_mmdb9k = "0.jwd0dqzlw7"
+# junk_var_svxirn = "0.ogklezzw97"
+# junk_var_vtsws = "0.k5ywomzr5bg"
+# junk_var_q5o5 = "0.pcgaozw04nb"
+# junk_var_bjw687 = "0.a6vj6ymrwu"
+# junk_var_uiafp = "0.nuyya2gvltb"
 
-# --- COLORS ---
-R = '\033[1;31m'  # Red
-G = '\033[1;32m'  # Green
-C = '\033[1;36m'  # Cyan
-Y = '\033[1;33m'  # Yellow
-P = '\033[1;35m'  # Purple
-W = '\033[1;37m'  # White
-BK = '\033[1;30m' # Black
-RESET = '\033[0m'
+def _helix_decrypt_layer(data):
+    return b64.b64decode(data).decode('utf-8')
 
-system_os = platform.system()
-
-# Check Pyfiglet for Windows Preview
-try:
-    import pyfiglet
-except ImportError:
-    pyfiglet = None
-
-def get_cols():
-    try:
-        cols, _ = shutil.get_terminal_size()
-    except:
-        cols = 80
-    return cols
-
-def clear():
-    if system_os == "Windows": os.system('cls')
-    else: os.system('clear')
-
-# --- 1. INTRO BOOT ANIMATION ---
-def intro_animation():
-    clear()
-    cols = get_cols()
-    print(f"\n{BK} [INIT] ESTABLISHING CONNECTION TO UCA SERVER...{RESET}")
-    time.sleep(0.5)
-    
-    # Fake Matrix Rain / Boot Log
-    logs = [
-        "LOADING_KERNEL_MODULES",
-        "VERIFYING_USER_PERMISSIONS",
-        "FETCHING_THEME_DATABASE",
-        "OPTIMIZING_GRAPHIC_INTERFACE",
-        "ACCESS_GRANTED_UCA_CORE"
-    ]
-    
-    for log in logs:
-        sys.stdout.write(f"\r {C}:: SYSTEM_BOOT >> {log:<30} {Y}[WAIT]")
-        time.sleep(0.2)
-        sys.stdout.write(f"\r {C}:: SYSTEM_BOOT >> {log:<30} {G}[OK]  \n")
-        time.sleep(0.1)
-    
-    time.sleep(0.5)
-    clear()
-
-# --- 2. SETUP LOADING ANIMATION (5 STEPS) ---
-def install_loaders():
-    clear()
-    print(f"\n{G}[*] INITIALIZING INSTALLATION PROTOCOLS...{RESET}\n")
-    time.sleep(0.5)
-    
-    steps = [
-        "CONFIGURING DASHBOARD LAYOUT",
-        "DOWNLOADING HIGH-RES ASSETS",
-        "INJECTING BASH CONFIGURATION",
-        "OPTIMIZING PERFORMANCE",
-        "FINALIZING SYSTEM VERIFICATION"
-    ]
-    
-    for step in steps:
-        # Animation for each step
-        for i in range(4):
-            chars = "/-\|"
-            sys.stdout.write(f"\r {C}[PROCESS] {step}... {Y}{chars[i]} ")
-            sys.stdout.flush()
-            time.sleep(0.1)
-        
-        # Done status
-        sys.stdout.write(f"\r {C}[PROCESS] {step:<35} {G}[DONE] \n")
-        time.sleep(0.2)
-    
-    print(f"\n{BK} [LOG] SYSTEM REBOOT REQUIRED...{RESET}")
-    time.sleep(1)
-    clear()
-
-
-# --- HEADER ART ---
-def print_uca_header():
-    logo = f"""
-{C}██╗   ██╗ ██████╗ ██████╗ 
-{C}██║   ██║██╔════╝██╔══██╗   {Y}[ UCA TERMINAL PRO ]
-{C}██║   ██║██║     ███████║
-{C}██║   ██║██║     ██╔══██║   {R}OWNER : Mr.LEVIATHAN
-{C}╚██████╔╝╚██████╗██║  ██║   {G}STATUS: ONLINE
-{C} ╚═════╝  ╚═════╝╚═╝  ╚═╝
-"""
-    print(logo)
-    print(f"{BK}========================================{RESET}")
-
-# --- FONT DATABASE ---
-font_db = [
-    ("Bloody", "bloody"), ("Ansi Shadow", "ansi_shadow"), ("Graffiti", "graffiti"),
-    ("Electronic", "electronic"), ("Sub-Zero", "sub-zero"), ("Calvin S", "calvin_s"),
-    ("Slant", "slant"), ("Rectangles", "rectangles"), ("Larry 3D", "larry3d"),
-    ("Delta Corps", "delta_corps_priest_1"), ("Standard", "standard"), ("Big", "big"),
-    ("Script", "script"), ("Doom", "doom"), ("Speed", "speed"),
-    ("Alligator", "alligator"), ("Cyber Large", "cyberlarge"), ("Digital", "digital"),
-    ("Epic", "epic"), ("Fender", "fender"), ("Ghost", "ghost"),
-    ("Isometric1", "isometric1"), ("Isometric2", "isometric2"), ("Hollywood", "hollywood"),
-    ("Invita", "invita"), ("Kban", "kban"), ("Lean", "lean"),
-    ("Letters", "letters"), ("Linux", "linux"), ("Lockergnome", "lockergnome"),
-    ("Madrid", "madrid"), ("Marquee", "marquee"), ("Maxfour", "maxfour"),
-    ("Mike", "mike"), ("Mini", "mini"), ("Mirror", "mirror"),
-    ("NancyJ", "nancyj"), ("Nipples", "nipples"), ("Ogre", "ogre"),
-    ("Pawp", "pawp"), ("Peaks", "peaks"), ("Poison", "poison"),
-    ("Puffy", "puffy"), ("Pyramid", "pyramid"), ("Relief", "relief"),
-    ("Roman", "roman"), ("Rot13", "rot13"), ("Rounded", "rounded"),
-    ("Rowan Cap", "rowancap"), ("Serif Cap", "serifcap")
-]
-
-# --- REAL PREVIEW FUNCTION ---
-def show_preview(name, font_file, font_name):
-    clear()
-    cols = get_cols()
-    
-    # 1. INFO PANEL (TOP)
-    print(f"{C}╔{'═'*(cols-2)}╗")
-    print(f"{C}║ {P}PREVIEW MODE  {R}●  {W}STYLE: {Y}{font_name.upper()} {C}".center(cols+18))
-    print(f"{C}╠{'═'*(cols-2)}╣")
-    
-    # 2. BANNER GENERATION (MIDDLE)
-    print(f"{C}╚{'═'*(cols-2)}╝{RESET}") 
-    print("") 
-    
-    if system_os == "Windows":
-        if pyfiglet:
-            try:
-                # Windows Preview Logic
-                f_map = {
-                    "bloody": "larry3d", "ansi_shadow": "doom", "electronic": "computer",
-                    "sub-zero": "slant", "calvin_s": "block", "graffiti": "graffiti"
-                }
-                use_font = f_map.get(font_file, font_file)
-                if use_font not in pyfiglet.FigletFont.getFonts():
-                    use_font = "standard"
-                
-                art = pyfiglet.figlet_format(name, font=use_font, justify="center", width=cols)
-                print(f"{C}{art}{RESET}")
-            except Exception as e:
-                print(f"{R}[!] Font render error: {e}{RESET}")
-        else:
-            print(f"{R}[!] INSTALL PYFIGLET TO SEE VISUAL PREVIEW (pip install pyfiglet){RESET}")
-
-    else:
-        # TERMUX PREVIEW LOGIC
-        path = f"/data/data/com.termux/files/usr/share/figlet/{font_file}.flf"
-        # Download if missing (Lazy Load)
-        if not os.path.exists(path):
-             print(f"{BK}Downloading font assets...{RESET}")
-             os.system(f"wget -q http://www.figlet.org/fonts/{font_file}.flf -O {path}")
-             if not os.path.exists(path) or os.path.getsize(path) < 100:
-                  os.system(f"wget -q https://github.com/xero/figlet-fonts/raw/master/{font_file}.flf -O {path}")
-                  if font_file == "ansi_shadow": os.system(f"wget -q https://github.com/xero/figlet-fonts/raw/master/ANSI%20Shadow.flf -O {path}")
-
-        # Render Real Art
-        os.system(f'figlet -f {font_file} -w {cols} -c "{name}" | lolcat')
-
-    print("") # Spacer
-
-    # 3. FOOTER PANEL
-    print(f"{C}╔{'═'*(cols-2)}╗")
-    print(f"{C}║{f'{Y}>>> Made By Mr.LEVIATHAN <<<'.center(cols+8)}{C}║")
-    print(f"{C}╚{'═'*(cols-2)}╝{RESET}")
-
-# --- MAIN ---
-def main():
-    # 1. INTRO ANIMATION
-    intro_animation()
-
-    print_uca_header()
-
-    print(f"\n {C}┌──[ {P}IDENTITY {C}]")
-    try:
-        name = input(f" {C}└─➤ {Y}ENTER NAME :: {W}").strip()
-    except: name = "LEVIATHAN"
-    if not name: name = "LEVIATHAN"
-
-    while True:
-        clear()
-        print_uca_header()
-        print(f"{G} [✔] USER: {W}{name.upper()}{RESET}\n")
-        
-        # Menu
-        rows = (len(font_db) // 3) + 1
-        for i in range(rows):
-            idx1, idx2, idx3 = i, i + rows, i + (rows * 2)
-            s1 = f"{C}[{idx1+1:02}] {W}{font_db[idx1][0]:<14}" if idx1 < len(font_db) else ""
-            s2 = f"{C}[{idx2+1:02}] {W}{font_db[idx2][0]:<14}" if idx2 < len(font_db) else ""
-            s3 = f"{C}[{idx3+1:02}] {W}{font_db[idx3][0]:<14}" if idx3 < len(font_db) else ""
-            print(f" {s1} {s2} {s3}")
-
-        print(f"\n {C}┌──[ {P}CONFIG {C}]")
+class Helix_28blpe:
+    def __init__(self, payload):
+        self.p = payload
+    def run(self):
         try:
-            choice = int(input(f" {C}└─➤ {Y}SELECT ID :: {W}"))
-            if 1 <= choice <= len(font_db):
-                sel_name, sel_file = font_db[choice-1]
-            else:
-                sel_name, sel_file = font_db[0]
-        except:
-            sel_name, sel_file = font_db[0]
-
-        # SHOW THE REAL PREVIEW
-        show_preview(name, sel_file, sel_name)
-        
-        print(f"\n {R}[?] {Y}ACTIVATE DASHBOARD? {R}(y/n)")
-        confirm = input(f" {C}└─➤ {W}").strip().lower()
-        
-        if confirm == 'y':
-            # 2. RUN INSTALL LOADERS IF CONFIRMED
-            install_loaders()
-            break
-
-    # --- BASHRC INSTALL ---
-    bashrc_content = f"""
-# --- UCA SYSTEM ---
-clear
-PS1='\\[\\033[1;36m\\]┌──(\\[\\033[1;31m\\]UCA💀Termux\\[\\033[1;36m\\])-[\\[\\033[1;37m\\]\\w\\[\\033[1;36m\\]]\\n\\[\\033[1;36m\\]└─\\[\\033[1;33m\\]$\\[\\033[0m\\] '
-COLS=$(tput cols)
-C="\\033[1;36m"
-R="\\033[1;31m"
-W="\\033[1;37m"
-Y="\\033[1;33m"
-G="\\033[1;32m"
-BK="\\033[1;30m"
-RESET="\\033[0m"
-
-# Top Bar
-printf "$C╔"
-for ((i=1; i<=COLS-2; i++)); do printf "═"; done
-printf "╗\\n"
-printf "$C║ $R● $W UCA TERMINAL $R● $C USER: $Y{name.upper()}"
-printf "\\n"
-printf "$C╠"
-for ((i=1; i<=COLS-2; i++)); do printf "═"; done
-printf "╣\\n"
-DATE=$(date +"%d-%m")
-printf "$C║ $BK[NET]: $G SECURE  $BK[IP]: $G HIDDEN  $BK[DATE]: $W $DATE"
-printf "\\n"
-
-# Banner
-echo ""
-echo -e "$C"
-figlet -f {sel_file} -w $COLS -c "{name}"
-echo -e "$RESET"
-
-# Footer
-echo -e "$Y"
-MSG=">>> Made By Mr.LEVIATHAN <<<"
-printf "%*s\\n" $(( (${{#COLS}} + ${{#MSG}}) / 2)) "$MSG"
-echo -e "$RESET"
-printf "$C╚"
-for ((i=1; i<=COLS-2; i++)); do printf "═"; done
-printf "╝\\n"
-echo ""
-
-alias cls='clear'
-alias update='pkg update && pkg upgrade'
-"""
-
-    if system_os != "Windows":
-        home = os.environ.get('HOME', '/data/data/com.termux/files/home')
-        path = os.path.join(home, '.bashrc')
-        if os.path.exists(path): os.system(f"cp {path} {path}.bak")
-        with open(path, 'w') as f: f.write(bashrc_content)
-        
-        # 3. SUCCESS MESSAGE
-        print(f"\n{R}╔══════════════════════════════════════════╗")
-        print(f"{R}║ {G}  SETUP SUCCESSFUL! RESTART TERMUX NOW.   {R}║")
-        print(f"{R}╚══════════════════════════════════════════╝{RESET}\n")
+            exec(_helix_decrypt_layer(self.p), globals())
+        except Exception as e:
+            print("System Integrity Error!")
 
 if __name__ == "__main__":
-    main()
+    # Encrypted Payload Block
+    Ultra_rimrkf = "aW1wb3J0IG9zCmltcG9ydCB0aW1lCmltcG9ydCBzeXMKaW1wb3J0IHNodXRpbAppbXBvcnQgcGxhdGZvcm0KaW1wb3J0IHJhbmRvbQoKIyBUb29sOiBVQ0EtRGFzaGJvYXJkLVVsdGltYXRlCiMgQXV0aG9yOiBNci5MRVZJQVRIQU4KIyBEZXNjcmlwdGlvbjogSW50cm8gQW5pbWF0aW9uLCA1LVN0ZXAgTG9hZGVyICYgVmlzdWFsIFByZXZpZXcKCiMgLS0tIENPTE9SUyAtLS0KUiA9ICdcMDMzWzE7MzFtJyAgIyBSZWQKRyA9ICdcMDMzWzE7MzJtJyAgIyBHcmVlbgpDID0gJ1wwMzNbMTszNm0nICAjIEN5YW4KWSA9ICdcMDMzWzE7MzNtJyAgIyBZZWxsb3cKUCA9ICdcMDMzWzE7MzVtJyAgIyBQdXJwbGUKVyA9ICdcMDMzWzE7MzdtJyAgIyBXaGl0ZQpCSyA9ICdcMDMzWzE7MzBtJyAjIEJsYWNrClJFU0VUID0gJ1wwMzNbMG0nCgpzeXN0ZW1fb3MgPSBwbGF0Zm9ybS5zeXN0ZW0oKQoKIyBDaGVjayBQeWZpZ2xldCBmb3IgV2luZG93cyBQcmV2aWV3CnRyeToKICAgIGltcG9ydCBweWZpZ2xldApleGNlcHQgSW1wb3J0RXJyb3I6CiAgICBweWZpZ2xldCA9IE5vbmUKCmRlZiBnZXRfY29scygpOgogICAgdHJ5OgogICAgICAgIGNvbHMsIF8gPSBzaHV0aWwuZ2V0X3Rlcm1pbmFsX3NpemUoKQogICAgZXhjZXB0OgogICAgICAgIGNvbHMgPSA4MAogICAgcmV0dXJuIGNvbHMKCmRlZiBjbGVhcigpOgogICAgaWYgc3lzdGVtX29zID09ICJXaW5kb3dzIjogb3Muc3lzdGVtKCdjbHMnKQogICAgZWxzZTogb3Muc3lzdGVtKCdjbGVhcicpCgojIC0tLSAxLiBJTlRSTyBCT09UIEFOSU1BVElPTiAtLS0KZGVmIGludHJvX2FuaW1hdGlvbigpOgogICAgY2xlYXIoKQogICAgY29scyA9IGdldF9jb2xzKCkKICAgIHByaW50KGYiXG57Qkt9IFtJTklUXSBFU1RBQkxJU0hJTkcgQ09OTkVDVElPTiBUTyBVQ0EgU0VSVkVSLi4ue1JFU0VUfSIpCiAgICB0aW1lLnNsZWVwKDAuNSkKICAgIAogICAgIyBGYWtlIE1hdHJpeCBSYWluIC8gQm9vdCBMb2cKICAgIGxvZ3MgPSBbCiAgICAgICAgIkxPQURJTkdfS0VSTkVMX01PRFVMRVMiLAogICAgICAgICJWRVJJRllJTkdfVVNFUl9QRVJNSVNTSU9OUyIsCiAgICAgICAgIkZFVENISU5HX1RIRU1FX0RBVEFCQVNFIiwKICAgICAgICAiT1BUSU1JWklOR19HUkFQSElDX0lOVEVSRkFDRSIsCiAgICAgICAgIkFDQ0VTU19HUkFOVEVEX1VDQV9DT1JFIgogICAgXQogICAgCiAgICBmb3IgbG9nIGluIGxvZ3M6CiAgICAgICAgc3lzLnN0ZG91dC53cml0ZShmIlxyIHtDfTo6IFNZU1RFTV9CT09UID4+IHtsb2c6PDMwfSB7WX1bV0FJVF0iKQogICAgICAgIHRpbWUuc2xlZXAoMC4yKQogICAgICAgIHN5cy5zdGRvdXQud3JpdGUoZiJcciB7Q306OiBTWVNURU1fQk9PVCA+PiB7bG9nOjwzMH0ge0d9W09LXSAgXG4iKQogICAgICAgIHRpbWUuc2xlZXAoMC4xKQogICAgCiAgICB0aW1lLnNsZWVwKDAuNSkKICAgIGNsZWFyKCkKCiMgLS0tIDIuIFNFVFVQIExPQURJTkcgQU5JTUFUSU9OICg1IFNURVBTKSAtLS0KZGVmIGluc3RhbGxfbG9hZGVycygpOgogICAgY2xlYXIoKQogICAgcHJpbnQoZiJcbntHfVsqXSBJTklUSUFMSVpJTkcgSU5TVEFMTEFUSU9OIFBST1RPQ09MUy4uLntSRVNFVH1cbiIpCiAgICB0aW1lLnNsZWVwKDAuNSkKICAgIAogICAgc3RlcHMgPSBbCiAgICAgICAgIkNPTkZJR1VSSU5HIERBU0hCT0FSRCBMQVlPVVQiLAogICAgICAgICJET1dOTE9BRElORyBISUdILVJFUyBBU1NFVFMiLAogICAgICAgICJJTkpFQ1RJTkcgQkFTSCBDT05GSUdVUkFUSU9OIiwKICAgICAgICAiT1BUSU1JWklORyBQRVJGT1JNQU5DRSIsCiAgICAgICAgIkZJTkFMSVpJTkcgU1lTVEVNIFZFUklGSUNBVElPTiIKICAgIF0KICAgIAogICAgZm9yIHN0ZXAgaW4gc3RlcHM6CiAgICAgICAgIyBBbmltYXRpb24gZm9yIGVhY2ggc3RlcAogICAgICAgIGZvciBpIGluIHJhbmdlKDQpOgogICAgICAgICAgICBjaGFycyA9ICIvLVx8IgogICAgICAgICAgICBzeXMuc3Rkb3V0LndyaXRlKGYiXHIge0N9W1BST0NFU1NdIHtzdGVwfS4uLiB7WX17Y2hhcnNbaV19ICIpCiAgICAgICAgICAgIHN5cy5zdGRvdXQuZmx1c2goKQogICAgICAgICAgICB0aW1lLnNsZWVwKDAuMSkKICAgICAgICAKICAgICAgICAjIERvbmUgc3RhdHVzCiAgICAgICAgc3lzLnN0ZG91dC53cml0ZShmIlxyIHtDfVtQUk9DRVNTXSB7c3RlcDo8MzV9IHtHfVtET05FXSBcbiIpCiAgICAgICAgdGltZS5zbGVlcCgwLjIpCiAgICAKICAgIHByaW50KGYiXG57Qkt9IFtMT0ddIFNZU1RFTSBSRUJPT1QgUkVRVUlSRUQuLi57UkVTRVR9IikKICAgIHRpbWUuc2xlZXAoMSkKICAgIGNsZWFyKCkKCgojIC0tLSBIRUFERVIgQVJUIC0tLQpkZWYgcHJpbnRfdWNhX2hlYWRlcigpOgogICAgbG9nbyA9IGYiIiIKe0N94paI4paI4pWXICAg4paI4paI4pWXIOKWiOKWiOKWiOKWiOKWiOKWiOKVlyDilojilojilojilojilojilojilZcgCntDfeKWiOKWiOKVkSAgIOKWiOKWiOKVkeKWiOKWiOKVlOKVkOKVkOKVkOKVkOKVneKWiOKWiOKVlOKVkOKVkOKWiOKWiOKVlyAgIHtZfVsgVUNBIFRFUk1JTkFMIFBSTyBdCntDfeKWiOKWiOKVkSAgIOKWiOKWiOKVkeKWiOKWiOKVkSAgICAg4paI4paI4paI4paI4paI4paI4paI4pWRCntDfeKWiOKWiOKVkSAgIOKWiOKWiOKVkeKWiOKWiOKVkSAgICAg4paI4paI4pWU4pWQ4pWQ4paI4paI4pWRICAge1J9T1dORVIgOiBNci5MRVZJQVRIQU4Ke0N94pWa4paI4paI4paI4paI4paI4paI4pWU4pWd4pWa4paI4paI4paI4paI4paI4paI4pWX4paI4paI4pWRICDilojilojilZEgICB7R31TVEFUVVM6IE9OTElORQp7Q30g4pWa4pWQ4pWQ4pWQ4pWQ4pWQ4pWdICDilZrilZDilZDilZDilZDilZDilZ3ilZrilZDilZ0gIOKVmuKVkOKVnQoiIiIKICAgIHByaW50KGxvZ28pCiAgICBwcmludChmIntCS309PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09e1JFU0VUfSIpCgojIC0tLSBGT05UIERBVEFCQVNFIC0tLQpmb250X2RiID0gWwogICAgKCJCbG9vZHkiLCAiYmxvb2R5IiksICgiQW5zaSBTaGFkb3ciLCAiYW5zaV9zaGFkb3ciKSwgKCJHcmFmZml0aSIsICJncmFmZml0aSIpLAogICAgKCJFbGVjdHJvbmljIiwgImVsZWN0cm9uaWMiKSwgKCJTdWItWmVybyIsICJzdWItemVybyIpLCAoIkNhbHZpbiBTIiwgImNhbHZpbl9zIiksCiAgICAoIlNsYW50IiwgInNsYW50IiksICgiUmVjdGFuZ2xlcyIsICJyZWN0YW5nbGVzIiksICgiTGFycnkgM0QiLCAibGFycnkzZCIpLAogICAgKCJEZWx0YSBDb3JwcyIsICJkZWx0YV9jb3Jwc19wcmllc3RfMSIpLCAoIlN0YW5kYXJkIiwgInN0YW5kYXJkIiksICgiQmlnIiwgImJpZyIpLAogICAgKCJTY3JpcHQiLCAic2NyaXB0IiksICgiRG9vbSIsICJkb29tIiksICgiU3BlZWQiLCAic3BlZWQiKSwKICAgICgiQWxsaWdhdG9yIiwgImFsbGlnYXRvciIpLCAoIkN5YmVyIExhcmdlIiwgImN5YmVybGFyZ2UiKSwgKCJEaWdpdGFsIiwgImRpZ2l0YWwiKSwKICAgICgiRXBpYyIsICJlcGljIiksICgiRmVuZGVyIiwgImZlbmRlciIpLCAoIkdob3N0IiwgImdob3N0IiksCiAgICAoIklzb21ldHJpYzEiLCAiaXNvbWV0cmljMSIpLCAoIklzb21ldHJpYzIiLCAiaXNvbWV0cmljMiIpLCAoIkhvbGx5d29vZCIsICJob2xseXdvb2QiKSwKICAgICgiSW52aXRhIiwgImludml0YSIpLCAoIktiYW4iLCAia2JhbiIpLCAoIkxlYW4iLCAibGVhbiIpLAogICAgKCJMZXR0ZXJzIiwgImxldHRlcnMiKSwgKCJMaW51eCIsICJsaW51eCIpLCAoIkxvY2tlcmdub21lIiwgImxvY2tlcmdub21lIiksCiAgICAoIk1hZHJpZCIsICJtYWRyaWQiKSwgKCJNYXJxdWVlIiwgIm1hcnF1ZWUiKSwgKCJNYXhmb3VyIiwgIm1heGZvdXIiKSwKICAgICgiTWlrZSIsICJtaWtlIiksICgiTWluaSIsICJtaW5pIiksICgiTWlycm9yIiwgIm1pcnJvciIpLAogICAgKCJOYW5jeUoiLCAibmFuY3lqIiksICgiTmlwcGxlcyIsICJuaXBwbGVzIiksICgiT2dyZSIsICJvZ3JlIiksCiAgICAoIlBhd3AiLCAicGF3cCIpLCAoIlBlYWtzIiwgInBlYWtzIiksICgiUG9pc29uIiwgInBvaXNvbiIpLAogICAgKCJQdWZmeSIsICJwdWZmeSIpLCAoIlB5cmFtaWQiLCAicHlyYW1pZCIpLCAoIlJlbGllZiIsICJyZWxpZWYiKSwKICAgICgiUm9tYW4iLCAicm9tYW4iKSwgKCJSb3QxMyIsICJyb3QxMyIpLCAoIlJvdW5kZWQiLCAicm91bmRlZCIpLAogICAgKCJSb3dhbiBDYXAiLCAicm93YW5jYXAiKSwgKCJTZXJpZiBDYXAiLCAic2VyaWZjYXAiKQpdCgojIC0tLSBSRUFMIFBSRVZJRVcgRlVOQ1RJT04gLS0tCmRlZiBzaG93X3ByZXZpZXcobmFtZSwgZm9udF9maWxlLCBmb250X25hbWUpOgogICAgY2xlYXIoKQogICAgY29scyA9IGdldF9jb2xzKCkKICAgIAogICAgIyAxLiBJTkZPIFBBTkVMIChUT1ApCiAgICBwcmludChmIntDfeKVlHsn4pWQJyooY29scy0yKX3ilZciKQogICAgcHJpbnQoZiJ7Q33ilZEge1B9UFJFVklFVyBNT0RFICB7Un3il48gIHtXfVNUWUxFOiB7WX17Zm9udF9uYW1lLnVwcGVyKCl9IHtDfSIuY2VudGVyKGNvbHMrMTgpKQogICAgcHJpbnQoZiJ7Q33ilaB7J+KVkCcqKGNvbHMtMil94pWjIikKICAgIAogICAgIyAyLiBCQU5ORVIgR0VORVJBVElPTiAoTUlERExFKQogICAgcHJpbnQoZiJ7Q33ilZp7J+KVkCcqKGNvbHMtMil94pWde1JFU0VUfSIpIAogICAgcHJpbnQoIiIpIAogICAgCiAgICBpZiBzeXN0ZW1fb3MgPT0gIldpbmRvd3MiOgogICAgICAgIGlmIHB5ZmlnbGV0OgogICAgICAgICAgICB0cnk6CiAgICAgICAgICAgICAgICAjIFdpbmRvd3MgUHJldmlldyBMb2dpYwogICAgICAgICAgICAgICAgZl9tYXAgPSB7CiAgICAgICAgICAgICAgICAgICAgImJsb29keSI6ICJsYXJyeTNkIiwgImFuc2lfc2hhZG93IjogImRvb20iLCAiZWxlY3Ryb25pYyI6ICJjb21wdXRlciIsCiAgICAgICAgICAgICAgICAgICAgInN1Yi16ZXJvIjogInNsYW50IiwgImNhbHZpbl9zIjogImJsb2NrIiwgImdyYWZmaXRpIjogImdyYWZmaXRpIgogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgdXNlX2ZvbnQgPSBmX21hcC5nZXQoZm9udF9maWxlLCBmb250X2ZpbGUpCiAgICAgICAgICAgICAgICBpZiB1c2VfZm9udCBub3QgaW4gcHlmaWdsZXQuRmlnbGV0Rm9udC5nZXRGb250cygpOgogICAgICAgICAgICAgICAgICAgIHVzZV9mb250ID0gInN0YW5kYXJkIgogICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICBhcnQgPSBweWZpZ2xldC5maWdsZXRfZm9ybWF0KG5hbWUsIGZvbnQ9dXNlX2ZvbnQsIGp1c3RpZnk9ImNlbnRlciIsIHdpZHRoPWNvbHMpCiAgICAgICAgICAgICAgICBwcmludChmIntDfXthcnR9e1JFU0VUfSIpCiAgICAgICAgICAgIGV4Y2VwdCBFeGNlcHRpb24gYXMgZToKICAgICAgICAgICAgICAgIHByaW50KGYie1J9WyFdIEZvbnQgcmVuZGVyIGVycm9yOiB7ZX17UkVTRVR9IikKICAgICAgICBlbHNlOgogICAgICAgICAgICBwcmludChmIntSfVshXSBJTlNUQUxMIFBZRklHTEVUIFRPIFNFRSBWSVNVQUwgUFJFVklFVyAocGlwIGluc3RhbGwgcHlmaWdsZXQpe1JFU0VUfSIpCgogICAgZWxzZToKICAgICAgICAjIFRFUk1VWCBQUkVWSUVXIExPR0lDCiAgICAgICAgcGF0aCA9IGYiL2RhdGEvZGF0YS9jb20udGVybXV4L2ZpbGVzL3Vzci9zaGFyZS9maWdsZXQve2ZvbnRfZmlsZX0uZmxmIgogICAgICAgICMgRG93bmxvYWQgaWYgbWlzc2luZyAoTGF6eSBMb2FkKQogICAgICAgIGlmIG5vdCBvcy5wYXRoLmV4aXN0cyhwYXRoKToKICAgICAgICAgICAgIHByaW50KGYie0JLfURvd25sb2FkaW5nIGZvbnQgYXNzZXRzLi4ue1JFU0VUfSIpCiAgICAgICAgICAgICBvcy5zeXN0ZW0oZiJ3Z2V0IC1xIGh0dHA6Ly93d3cuZmlnbGV0Lm9yZy9mb250cy97Zm9udF9maWxlfS5mbGYgLU8ge3BhdGh9IikKICAgICAgICAgICAgIGlmIG5vdCBvcy5wYXRoLmV4aXN0cyhwYXRoKSBvciBvcy5wYXRoLmdldHNpemUocGF0aCkgPCAxMDA6CiAgICAgICAgICAgICAgICAgIG9zLnN5c3RlbShmIndnZXQgLXEgaHR0cHM6Ly9naXRodWIuY29tL3hlcm8vZmlnbGV0LWZvbnRzL3Jhdy9tYXN0ZXIve2ZvbnRfZmlsZX0uZmxmIC1PIHtwYXRofSIpCiAgICAgICAgICAgICAgICAgIGlmIGZvbnRfZmlsZSA9PSAiYW5zaV9zaGFkb3ciOiBvcy5zeXN0ZW0oZiJ3Z2V0IC1xIGh0dHBzOi8vZ2l0aHViLmNvbS94ZXJvL2ZpZ2xldC1mb250cy9yYXcvbWFzdGVyL0FOU0klMjBTaGFkb3cuZmxmIC1PIHtwYXRofSIpCgogICAgICAgICMgUmVuZGVyIFJlYWwgQXJ0CiAgICAgICAgb3Muc3lzdGVtKGYnZmlnbGV0IC1mIHtmb250X2ZpbGV9IC13IHtjb2xzfSAtYyAie25hbWV9IiB8IGxvbGNhdCcpCgogICAgcHJpbnQoIiIpICMgU3BhY2VyCgogICAgIyAzLiBGT09URVIgUEFORUwKICAgIHByaW50KGYie0N94pWUeyfilZAnKihjb2xzLTIpfeKVlyIpCiAgICBwcmludChmIntDfeKVkXtmJ3tZfT4+PiBNYWRlIEJ5IE1yLkxFVklBVEhBTiA8PDwnLmNlbnRlcihjb2xzKzgpfXtDfeKVkSIpCiAgICBwcmludChmIntDfeKVmnsn4pWQJyooY29scy0yKX3ilZ17UkVTRVR9IikKCiMgLS0tIE1BSU4gLS0tCmRlZiBtYWluKCk6CiAgICAjIDEuIElOVFJPIEFOSU1BVElPTgogICAgaW50cm9fYW5pbWF0aW9uKCkKCiAgICBwcmludF91Y2FfaGVhZGVyKCkKCiAgICBwcmludChmIlxuIHtDfeKUjOKUgOKUgFsge1B9SURFTlRJVFkge0N9XSIpCiAgICB0cnk6CiAgICAgICAgbmFtZSA9IGlucHV0KGYiIHtDfeKUlOKUgOKepCB7WX1FTlRFUiBOQU1FIDo6IHtXfSIpLnN0cmlwKCkKICAgIGV4Y2VwdDogbmFtZSA9ICJMRVZJQVRIQU4iCiAgICBpZiBub3QgbmFtZTogbmFtZSA9ICJMRVZJQVRIQU4iCgogICAgd2hpbGUgVHJ1ZToKICAgICAgICBjbGVhcigpCiAgICAgICAgcHJpbnRfdWNhX2hlYWRlcigpCiAgICAgICAgcHJpbnQoZiJ7R30gW+KclF0gVVNFUjoge1d9e25hbWUudXBwZXIoKX17UkVTRVR9XG4iKQogICAgICAgIAogICAgICAgICMgTWVudQogICAgICAgIHJvd3MgPSAobGVuKGZvbnRfZGIpIC8vIDMpICsgMQogICAgICAgIGZvciBpIGluIHJhbmdlKHJvd3MpOgogICAgICAgICAgICBpZHgxLCBpZHgyLCBpZHgzID0gaSwgaSArIHJvd3MsIGkgKyAocm93cyAqIDIpCiAgICAgICAgICAgIHMxID0gZiJ7Q31be2lkeDErMTowMn1dIHtXfXtmb250X2RiW2lkeDFdWzBdOjwxNH0iIGlmIGlkeDEgPCBsZW4oZm9udF9kYikgZWxzZSAiIgogICAgICAgICAgICBzMiA9IGYie0N9W3tpZHgyKzE6MDJ9XSB7V317Zm9udF9kYltpZHgyXVswXTo8MTR9IiBpZiBpZHgyIDwgbGVuKGZvbnRfZGIpIGVsc2UgIiIKICAgICAgICAgICAgczMgPSBmIntDfVt7aWR4MysxOjAyfV0ge1d9e2ZvbnRfZGJbaWR4M11bMF06PDE0fSIgaWYgaWR4MyA8IGxlbihmb250X2RiKSBlbHNlICIiCiAgICAgICAgICAgIHByaW50KGYiIHtzMX0ge3MyfSB7czN9IikKCiAgICAgICAgcHJpbnQoZiJcbiB7Q33ilIzilIDilIBbIHtQfUNPTkZJRyB7Q31dIikKICAgICAgICB0cnk6CiAgICAgICAgICAgIGNob2ljZSA9IGludChpbnB1dChmIiB7Q33ilJTilIDinqQge1l9U0VMRUNUIElEIDo6IHtXfSIpKQogICAgICAgICAgICBpZiAxIDw9IGNob2ljZSA8PSBsZW4oZm9udF9kYik6CiAgICAgICAgICAgICAgICBzZWxfbmFtZSwgc2VsX2ZpbGUgPSBmb250X2RiW2Nob2ljZS0xXQogICAgICAgICAgICBlbHNlOgogICAgICAgICAgICAgICAgc2VsX25hbWUsIHNlbF9maWxlID0gZm9udF9kYlswXQogICAgICAgIGV4Y2VwdDoKICAgICAgICAgICAgc2VsX25hbWUsIHNlbF9maWxlID0gZm9udF9kYlswXQoKICAgICAgICAjIFNIT1cgVEhFIFJFQUwgUFJFVklFVwogICAgICAgIHNob3dfcHJldmlldyhuYW1lLCBzZWxfZmlsZSwgc2VsX25hbWUpCiAgICAgICAgCiAgICAgICAgcHJpbnQoZiJcbiB7Un1bP10ge1l9QUNUSVZBVEUgREFTSEJPQVJEPyB7Un0oeS9uKSIpCiAgICAgICAgY29uZmlybSA9IGlucHV0KGYiIHtDfeKUlOKUgOKepCB7V30iKS5zdHJpcCgpLmxvd2VyKCkKICAgICAgICAKICAgICAgICBpZiBjb25maXJtID09ICd5JzoKICAgICAgICAgICAgIyAyLiBSVU4gSU5TVEFMTCBMT0FERVJTIElGIENPTkZJUk1FRAogICAgICAgICAgICBpbnN0YWxsX2xvYWRlcnMoKQogICAgICAgICAgICBicmVhawoKICAgICMgLS0tIEJBU0hSQyBJTlNUQUxMIC0tLQogICAgYmFzaHJjX2NvbnRlbnQgPSBmIiIiCiMgLS0tIFVDQSBTWVNURU0gLS0tCmNsZWFyClBTMT0nXFxbXFwwMzNbMTszNm1cXF3ilIzilIDilIAoXFxbXFwwMzNbMTszMW1cXF1VQ0Hwn5KAVGVybXV4XFxbXFwwMzNbMTszNm1cXF0pLVtcXFtcXDAzM1sxOzM3bVxcXVxcd1xcW1xcMDMzWzE7MzZtXFxdXVxcblxcW1xcMDMzWzE7MzZtXFxd4pSU4pSAXFxbXFwwMzNbMTszM21cXF0kXFxbXFwwMzNbMG1cXF0gJwpDT0xTPSQodHB1dCBjb2xzKQpDPSJcXDAzM1sxOzM2bSIKUj0iXFwwMzNbMTszMW0iClc9IlxcMDMzWzE7MzdtIgpZPSJcXDAzM1sxOzMzbSIKRz0iXFwwMzNbMTszMm0iCkJLPSJcXDAzM1sxOzMwbSIKUkVTRVQ9IlxcMDMzWzBtIgoKIyBUb3AgQmFyCnByaW50ZiAiJEPilZQiCmZvciAoKGk9MTsgaTw9Q09MUy0yOyBpKyspKTsgZG8gcHJpbnRmICLilZAiOyBkb25lCnByaW50ZiAi4pWXXFxuIgpwcmludGYgIiRD4pWRICRS4pePICRXIFVDQSBURVJNSU5BTCAkUuKXjyAkQyBVU0VSOiAkWXtuYW1lLnVwcGVyKCl9IgpwcmludGYgIlxcbiIKcHJpbnRmICIkQ+KVoCIKZm9yICgoaT0xOyBpPD1DT0xTLTI7IGkrKykpOyBkbyBwcmludGYgIuKVkCI7IGRvbmUKcHJpbnRmICLilaNcXG4iCkRBVEU9JChkYXRlICsiJWQtJW0iKQpwcmludGYgIiRD4pWRICRCS1tORVRdOiAkRyBTRUNVUkUgICRCS1tJUF06ICRHIEhJRERFTiAgJEJLW0RBVEVdOiAkVyAkREFURSIKcHJpbnRmICJcXG4iCgojIEJhbm5lcgplY2hvICIiCmVjaG8gLWUgIiRDIgpmaWdsZXQgLWYge3NlbF9maWxlfSAtdyAkQ09MUyAtYyAie25hbWV9IgplY2hvIC1lICIkUkVTRVQiCgojIEZvb3RlcgplY2hvIC1lICIkWSIKTVNHPSI+Pj4gTWFkZSBCeSBNci5MRVZJQVRIQU4gPDw8IgpwcmludGYgIiUqc1xcbiIgJCgoICgke3sjQ09MU319ICsgJHt7I01TR319KSAvIDIpKSAiJE1TRyIKZWNobyAtZSAiJFJFU0VUIgpwcmludGYgIiRD4pWaIgpmb3IgKChpPTE7IGk8PUNPTFMtMjsgaSsrKSk7IGRvIHByaW50ZiAi4pWQIjsgZG9uZQpwcmludGYgIuKVnVxcbiIKZWNobyAiIgoKYWxpYXMgY2xzPSdjbGVhcicKYWxpYXMgdXBkYXRlPSdwa2cgdXBkYXRlICYmIHBrZyB1cGdyYWRlJwoiIiIKCiAgICBpZiBzeXN0ZW1fb3MgIT0gIldpbmRvd3MiOgogICAgICAgIGhvbWUgPSBvcy5lbnZpcm9uLmdldCgnSE9NRScsICcvZGF0YS9kYXRhL2NvbS50ZXJtdXgvZmlsZXMvaG9tZScpCiAgICAgICAgcGF0aCA9IG9zLnBhdGguam9pbihob21lLCAnLmJhc2hyYycpCiAgICAgICAgaWYgb3MucGF0aC5leGlzdHMocGF0aCk6IG9zLnN5c3RlbShmImNwIHtwYXRofSB7cGF0aH0uYmFrIikKICAgICAgICB3aXRoIG9wZW4ocGF0aCwgJ3cnKSBhcyBmOiBmLndyaXRlKGJhc2hyY19jb250ZW50KQogICAgICAgIAogICAgICAgICMgMy4gU1VDQ0VTUyBNRVNTQUdFCiAgICAgICAgcHJpbnQoZiJcbntSfeKVlOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVlyIpCiAgICAgICAgcHJpbnQoZiJ7Un3ilZEge0d9ICBTRVRVUCBTVUNDRVNTRlVMISBSRVNUQVJUIFRFUk1VWCBOT1cuICAge1J94pWRIikKICAgICAgICBwcmludChmIntSfeKVmuKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVkOKVnXtSRVNFVH1cbiIpCgppZiBfX25hbWVfXyA9PSAiX19tYWluX18iOgogICAgbWFpbigp"
+    # junk_var_rr7o2j = "0.ftjtnd31lur"
+# junk_var_rw8rrc = "0.ok1tjj4gfm"
+# junk_var_egft0sh = "0.fz0shozovr9"
+# junk_var_2f1jxk = "0.sra1vq2z9ha"
+# junk_var_mmdb9k = "0.jwd0dqzlw7"
+# junk_var_svxirn = "0.ogklezzw97"
+# junk_var_vtsws = "0.k5ywomzr5bg"
+# junk_var_q5o5 = "0.pcgaozw04nb"
+# junk_var_bjw687 = "0.a6vj6ymrwu"
+# junk_var_uiafp = "0.nuyya2gvltb"
+
+    Helix_28blpe(Ultra_rimrkf).run()
+    
+# --- END PROTECTED ---
